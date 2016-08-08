@@ -21,6 +21,25 @@ console.log(app);
 
 
 
+
+// Cross-Site Scripting (XSS) PROTECTION 
+var entityMapping = {
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': '&quot;',
+  "'": '&#39;',
+  "/": '&#x2F;'
+};
+
+var escapeHtml = function(string) {
+  return String(string).replace(/[&<>"'\/]/g, function(char) {
+    return entityMapping[char];
+  });
+};
+
+
+
 console.log(getThis);
 /*$(document).ready( function () {
   $('.message-pane').click(function () {
