@@ -59,6 +59,11 @@ form input[type=text] {
     padding: 5px;
 }
 
+.message-pane {
+    height: 100px;
+    background: whitesmoke;
+}
+
 .chat {
     padding: 5px;
     margin-bottom: 5px;
