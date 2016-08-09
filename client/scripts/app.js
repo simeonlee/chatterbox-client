@@ -70,8 +70,8 @@ app.clearMessages = function() {
 
 app.addMessage = function(message) {
   var username = message.username;
-  var text = message.text;
-  var time = message.createdAt;
+  var text = escapeHtml(message.text);
+  var time = escapeHtml(message.createdAt);
 
   var $chats = $('#chats');
 
