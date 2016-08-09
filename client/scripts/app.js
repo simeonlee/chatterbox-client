@@ -105,6 +105,7 @@ app.addFriend = function(username) {
   var $newFriend = $('<div>', {class: 'friend friend-username'});
   $newFriend.text(username);
   $('#friends').append($newFriend);
+
 };
 
 // Cross-Site Scripting (XSS) PROTECTION 
@@ -123,6 +124,9 @@ var escapeHtml = function(string) {
     return entityMapping[char];
   });
 };
+
+
+
 
 // Calculates the time since the tweet was created
 var calculateSince = function(datetime) {
