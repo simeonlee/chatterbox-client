@@ -4,6 +4,16 @@ $(document).ready(function() {
   $('.message-btn').on('click', function() {
     app.handleSubmit();
   });
+
+  $('.text-input').keypress(function(e) {
+    if (e.which === 13) {
+      app.handleSubmit();
+    }
+  });
+
+  $('input:text:visible:first').focus();
+
+  setInterval(app.fetch, 1000);
 });
 
 // var url = 'https://api.parse.com/1/classes/messages';
@@ -16,14 +26,15 @@ app.init = function() {
   // initialize stuff (parse?)
 };
 
-
 app.handleSubmit = function() {
   message = {};
   message.text = $('.text-input').val();
+  var loggedInUser = window.location.search.slice(window.location.search.indexOf('=') + 1);
+  message.username = loggedInUser;
   console.log(message);
-  debugger;
   app.addMessage(message);
   app.send(message);
+  $('.text-input').val('');
 };
 
 app.send = function(message) {
@@ -44,13 +55,14 @@ app.fetch = function() {
     success: function(data) {
       console.log(data);
       var results = data.results;
-      for ( var i = 0; i < results.length; i++ ) {
+      for ( var i = results.length - 1; i >= 0; i-- ) {
         var message = results[i];
         app.addMessage(message);
       }
     }
   });
 };
+
 
 app.clearMessages = function() {
   $('#chats').empty();
@@ -59,18 +71,23 @@ app.clearMessages = function() {
 app.addMessage = function(message) {
   var username = message.username;
   var text = message.text;
+  var time = message.createdAt;
 
   var $chats = $('#chats');
+
   var $chat = $('<div>', {class: 'chat'});
   var $username = $('<div>', {class: 'username'});
   var $text = $('<div>', {class: 'chat chat-text'});
+  var $time = $('<div>', {class: 'chat chat-time'});
 
   $username.text(username);
   $text.text(text);
+  $time.text(calculateSince(time));
 
   $chat.append($username);
   $chat.append($text);
-  $chats.append($chat);
+  $chat.append($time);
+  $chats.prepend($chat);
 
   $username.on('click', function() {
     app.addFriend(username);
@@ -106,6 +123,55 @@ var escapeHtml = function(string) {
     return entityMapping[char];
   });
 };
+
+// Calculates the time since the tweet was created
+var calculateSince = function(datetime) {
+    
+  var tTime = new Date(datetime);
+  var cTime = new Date();
+  var sinceMin = Math.round((cTime-tTime)/60000);
+  
+  if (sinceMin === 0) {
+    var sinceSec = Math.round((cTime-tTime)/1000);
+    if (sinceSec < 10) {
+      var since = 'less than 10 seconds ago';
+    } else if (sinceSec < 20) {
+      var since = 'less than 20 seconds ago';
+    } else {
+      var since = 'half a minute ago';
+    }
+  } else if (sinceMin === 1) {
+    var sinceSec = Math.round((cTime-tTime)/1000);
+    if (sinceSec === 30) {
+      var since = 'half a minute ago';
+    } else if (sinceSec < 60) {
+      var since = 'less than a minute ago';
+    } else {
+      var since = '1 minute ago';
+    }
+  } else if (sinceMin < 45) {
+    var since = sinceMin + ' minutes ago';
+  } else if (sinceMin > 44 && sinceMin < 60) {
+    var since = 'about 1 hour ago';
+  } else if (sinceMin < 1440) {
+    var sinceHr = Math.round(sinceMin/60);
+    if (sinceHr === 1) {
+      var since = 'about 1 hour ago';
+    } else {
+      var since = 'about ' + sinceHr + ' hours ago';
+    }
+  } else if (sinceMin > 1439 && sinceMin < 2880) {
+    var since = '1 day ago';
+  } else {
+    var sinceDay = Math.round(sinceMin/1440);
+    var since = sinceDay + ' days ago';
+  }
+  return since;
+};
+
+
+
+
 
 
 

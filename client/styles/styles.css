@@ -1,14 +1,52 @@
 body {
     background: #eee;
     text-align: center;
-    padding: 0 25px;
+    padding: 0;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
+    background: url('http://webernautdesigns.com/wp-content/uploads/2013/07/Nature-Sunset-Light-Blur-Background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+#send {
+  position: fixed;
+  bottom: 0;
+}
+
+#friends {
+    background: rgba(0,0,0,0.2);
+    padding: 20px;
+    color: #fff;
+}
+
+.nav {
+  height: 50px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: rgba(40, 40, 40, 0.8);
+  box-shadow: 0 0px 4px rgba(120, 120, 120, 0.6);
+  display: flex;
+  align-items: center;
+  position: absolute;
+  font-weight: 400;
+  color: white;
+  font-size: 24px;
+  letter-spacing: 1px;
+}
+
+.nav div {
+  margin: 0 0 0 2%;
+}
+
+.container {
+  padding: 50px 0 0 0;
 }
 
 #main, #chats {
    
-    background: white;
+    background: rgba(0,0,0,0.2);
     padding: 50px 60px;
     /*border: solid #ddd;*/
     /*border-width: 0 1px 1px 1px;*/
@@ -69,6 +107,11 @@ form input[type=text] {
     background-color: #eee;
 }
 
+.chat.chat-text {
+    max-height: 90px;
+    overflow: scroll;
+}
+
 .chat .username {
     font-weight: 800;
 }
@@ -90,11 +133,26 @@ form input[type=text] {
 .friend {
     color: #fff;
     background-color: #0090da;
+    margin: 10px 15px;
+    padding: 5px;
 }
 
+
+
+div#send {
+    width: 90%;
+}
+
+
 .username {
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 400;
   /*margin: 0;
   padding: 0;*/
+}
+
+.chat-time {
+  font-size: 10px;
+  font-weight: 300;
+  color: rgba(80, 80, 80, 0.9);
 }
