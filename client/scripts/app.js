@@ -1,28 +1,97 @@
-// YOUR CODE HERE:
+$(document).ready(function() {
+  app.fetch();
 
+  $('.message-btn').on('click', function() {
+    app.handleSubmit();
+  });
+});
 
+// var url = 'https://api.parse.com/1/classes/messages';
+var message;
 var app = {
-  url: 'https://api.parse.com/1/classes/messages'
+  server: 'https://api.parse.com/1/classes/messages'
+};
+
+app.init = function() {
+  // initialize stuff (parse?)
 };
 
 
+app.handleSubmit = function() {
+  message = {};
+  message.text = $('.text-input').val();
+  console.log(message);
+  debugger;
+  app.addMessage(message);
+  app.send(message);
+};
 
+app.send = function(message) {
+  $.ajax({
+    url: app.server,
+    type: 'POST',
+    dataType: 'json',
+    data: JSON.stringify(message)
+  });
+};
 
+app.fetch = function() {
+  $.ajax({
+    url: app.server,
+    type: 'GET',
+    dataType: 'json',
+    // data: JSON.parse(data),
+    success: function(data) {
+      console.log(data);
+      var results = data.results;
+      for ( var i = 0; i < results.length; i++ ) {
+        var message = results[i];
+        app.addMessage(message);
+      }
+    }
+  });
+};
 
-console.log(app);
+app.clearMessages = function() {
+  $('#chats').empty();
+};
 
-// fetch messages
+app.addMessage = function(message) {
+  var username = message.username;
+  var text = message.text;
 
-  var getThis = $.ajax({
-								    url: app.url,
-								    type: 'GET',
-								  
-								  });
+  var $chats = $('#chats');
+  var $chat = $('<div>', {class: 'chat'});
+  var $username = $('<div>', {class: 'username'});
+  var $text = $('<div>', {class: 'chat chat-text'});
 
+  $username.text(username);
+  $text.text(text);
 
+  $chat.append($username);
+  $chat.append($text);
+  $chats.append($chat);
 
+  $username.on('click', function() {
+    app.addFriend(username);
+  });
+};
+
+app.addRoom = function(roomName) {
+  var $roomSelect = $('#roomSelect');
+  var $room = $('<div>', {class: 'room'});
+  $room.text(roomName);
+  $roomSelect.append($room);
+};
+
+app.addFriend = function(username) {
+  var $newFriend = $('<div>', {class: 'friend friend-username'});
+  $newFriend.text(username);
+  $('#friends').append($newFriend);
+};
 
 // Cross-Site Scripting (XSS) PROTECTION 
+  // we'll wrap all messages / user input in this escape HTML func
 var entityMapping = {
   "&": "&amp;",
   "<": "&lt;",
@@ -40,7 +109,7 @@ var escapeHtml = function(string) {
 
 
 
-console.log(getThis);
+// console.log(getThis);
 /*$(document).ready( function () {
   $('.message-pane').click(function () {
     $(this).slideUp();

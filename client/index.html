@@ -3,6 +3,9 @@
   <head>
     <meta charset="utf-8">
     <title>chatterbox</title>
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="styles/styles.css">
 
     <!-- dependencies -->
@@ -13,11 +16,34 @@
     <script src="scripts/app.js"></script>
   </head>
   <body>
-    <div id="main">
-      <h1>chatterbox</h1>
-      <!-- Your HTML goes here! -->
-      <div class ="message-pane"></div>
-    </div>
-    <div id="chats"></div>
+    <h1>Chat-tastic</h1>
+
+    <div id="container">
+
+      <!-- <div id="main"> -->
+
+        <div class="col-md-8">
+          <div id="chats"></div>
+        </div>
+
+      <!-- </div> -->
+
+      <div class="col-md-4">
+        <div id="roomSelect"></div>
+        <div id="friends">Friends</div>
+      </div>
+
+      <div id="send" class="input-group col-md-12">
+        <div class="input-group">
+          <input type="text" class="form-control text-input" placeholder="Enter your message">
+          <span class="input-group-btn">
+            <button class="btn btn-success message-btn" type="button">Send</button>
+          </span>
+        </div>
+      </div>
+
+    </div><!-- container end -->
+
   </body>
+
 </html>
