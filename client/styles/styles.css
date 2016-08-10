@@ -3,7 +3,7 @@ body {
     text-align: center;
     padding: 0;
     font-family: 'Roboto', sans-serif;
-    font-weight: 300;
+    font-weight: 100;
     background: url('http://webernautdesigns.com/wp-content/uploads/2013/07/Nature-Sunset-Light-Blur-Background.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -102,56 +102,107 @@ form input[type=text] {
 }
 
 .chat {
-    padding: 5px;
-    margin-bottom: 5px;
-    background-color: #eee;
+  padding: 5px;
+  margin-bottom: 5px;
+  background-color: #eee;
 }
 
 .chat.chat-text {
-    max-height: 90px;
-    overflow: scroll;
-}
-
-.chat .username {
-    font-weight: 800;
+  max-height: 90px;
+  overflow: scroll;
 }
 
 .chat:hover {
-    background-color: #ddd;
+  background-color: #ddd;
 }
 
 .spinner {
-    float: right;
-    height: 46px;
-    margin-bottom: 5px;
+  float: right;
+  height: 46px;
+  margin-bottom: 5px;
+}
+
+div#roomSelect {
+  background: rgba(0,0,0,0.2);
+  padding-top: 10px;
+  color: #fff;
 }
 
 .spinner img {
-    padding: 10px;
+  padding: 10px;
 }
 
 .friend {
-    color: #fff;
-    background-color: #0090da;
-    margin: 10px 15px;
-    padding: 5px;
+  color: #fff;
+  background-color: #0090da;
+  margin: 10px 15px;
+  padding: 5px;
 }
-
-
 
 div#send {
-    width: 90%;
+  width: 90%;
+}
+
+.chat div {
+  margin: 0;
+  padding: 0;
+}
+
+.username:before {
+  /*content: '@';*/
+}
+
+.username:after {
+  content: ' says...';
+}
+
+.username {
+  font-size: 14px;
+  font-weight: 100;
+  position: absolute;
+  left: 14px;
+  top: 10px;
 }
 
 
-.username {
-  font-size: 12px;
-  font-weight: 400;
-  /*margin: 0;
-  padding: 0;*/
+.chat {
+  height: 100px;
+  position: relative;
+}
+
+.chat-roomname:before {
+  content: 'Posted in ';
+}
+
+.chat-roomname {
+  font-size: 10px;
+  font-weight: 300;
+  position: absolute;
+  top: 76px;
+  left: 14px;
+  background: none;
+}
+
+.chat-text {
+  position: absolute;
+  font-size: 20px;
+  font-weight: 100;
+  top: 36px;
+  left: 14px;
+  background: none;
+  width: 96%;
+  height: 30px;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .chat-time {
+  position: absolute;
+  right: 14px;
+  top: 10px;
+  height: 10px;
+  background: none;
   font-size: 10px;
   font-weight: 300;
   color: rgba(80, 80, 80, 0.9);
